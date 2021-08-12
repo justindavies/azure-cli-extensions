@@ -1366,6 +1366,8 @@ class AzureKubernetesServiceScenarioTest(ScenarioTest):
             self.check(
                 'agentPoolProfiles[0].kubeletConfig.cpuManagerPolicy', 'static'),
             self.check(
+                'agentPoolProfiles[0].kubeletConfig.podMaxPids', 120),
+            self.check(
                 'agentPoolProfiles[0].linuxOsConfig.swapFileSizeMb', 1500),
             self.check(
                 'agentPoolProfiles[0].linuxOsConfig.sysctls.netIpv4TcpTwReuse', True)
@@ -1377,6 +1379,7 @@ class AzureKubernetesServiceScenarioTest(ScenarioTest):
         self.cmd(nodepool_cmd, checks=[
             self.check('provisioningState', 'Succeeded'),
             self.check('kubeletConfig.cpuCfsQuotaPeriod', '200ms'),
+            self.check('kubeletConfig.podMaxPids', 120),
             self.check('linuxOsConfig.sysctls.netCoreSomaxconn', 163849)
         ])
 
